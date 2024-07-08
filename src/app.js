@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const sequelize = require('./config/sequelize');
 const CasaApuestas = require('./models/CasaApuestas');
 const Apuesta = require('./models/Apuesta');
@@ -8,7 +9,11 @@ const transaccionesRoutes = require('./routes/transacciones');
 const initDb = require('./initDb');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
+
+//Habilitar CORS para todas las rutas
+app.use(cors());
+
 
 app.use(express.json());
 

@@ -46,15 +46,19 @@ router.get('/:id', async (req, res) => {
  */
 // POST una nueva casa de apuestas
 router.post('/', async (req, res) => {
-    console.log('Recibida solicitud POST:', req.body);
-    try {
-      const nuevaCasaApuestas = await CasaApuestas.create(req.body);
-      res.status(201).json(nuevaCasaApuestas);
-    } catch (error) {
-      console.error('Error al crear casa de apuestas:', error);
-      res.status(400).json({ message: error.message });
-    }
-  });
+  console.log('Datos recibidos:', req.body);
+  try {
+    const nuevaCasaApuestas = await CasaApuestas.create(req.body);
+    res.status(201).json(nuevaCasaApuestas);
+  } catch (error) {
+    console.error('Error detallado:', error);
+    res.status(400).json({ 
+      message: error.message, 
+      name: error.name,
+      errors: error.errors
+    });
+  }
+});
 /**
  * @swagger
  * components:
